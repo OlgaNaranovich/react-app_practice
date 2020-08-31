@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import reducer from './store/index';
+import {BrowserRouter as Router} from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
+
+const middleware = applyMiddleware(thunk);
+const store = createStore(reducer, composeWithDevTools(middleware));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+     <Router>
+         <App />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
