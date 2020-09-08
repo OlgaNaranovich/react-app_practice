@@ -13,7 +13,6 @@ const DraggableComponent = ({ children, id, isRemovePersonFromCol }) => {
 
   const noAllowDrop = (e) => {
     // e.stopPropagation();
-    console.log(targetId,colId);
     isRemovePersonFromCol(targetId, colId);
   };
 
