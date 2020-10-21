@@ -4,10 +4,12 @@ import {bindActionCreators} from 'redux';
 import {isUserDataReset} from '../../store/userLogin/actions';
 import { Link } from 'react-router-dom';
 import { navMenu } from '../../config/routeConfig';
+import { useTheme } from '../../components/theme/ThemeContext';
 import User from '../User/User';
 import { HeaderWrapper, Nav, NavList, NavItem, Login } from './Header.styled';
 
 const Header = ({ location, userState, userDataSaved, resetUserData }) => {
+  const { toggleTheme } = useTheme();
 
   const userAbbr = userState.userName.value[0];
 
@@ -24,6 +26,7 @@ const Header = ({ location, userState, userDataSaved, resetUserData }) => {
           ))}
         </NavList>
       </Nav>
+      <button className="btn btn-primary" onClick={toggleTheme}>Toggle theme</button>
       {!userDataSaved ? <Link to={'/profile'}><Login>Login</Login></Link> : <User userAbbr={userAbbr} resetUserData={resetUserData} />}
 
     </HeaderWrapper>
